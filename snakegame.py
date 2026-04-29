@@ -8,7 +8,8 @@ screen = pygame.display.set_mode((WIDTH,HEIGHT))
 pygame.display.set_caption("Snake Game")
 
 clock = pygame.time.Clock()
-
+snake = [(100,100), (90,100), (80,100)]
+block_size = 10
 
 while True:
     for event in pygame.event.get():
@@ -16,7 +17,9 @@ while True:
             pygame.quit()
             sys.exit()
     
-    screen.fill((0,0,0))    
+    screen.fill((0,0,0))
+    for block in snake:
+        pygame.draw.rect(screen,(0,255,0),(block[0],block[1],block_size,block_size))    
     pygame.display.update()
     clock.tick()
     
