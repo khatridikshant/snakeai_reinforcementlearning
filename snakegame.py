@@ -1,5 +1,6 @@
 import pygame
 import sys
+import random
 
 pygame.init()
 
@@ -12,6 +13,7 @@ snake = [(100,100), (90,100), (80,100)]
 block_size = 10
 
 direction = "RIGHT"
+food = (random.randrange(0,WIDTH,block_size),random.randrange(0,HEIGHT,block_size))
 
 
 
@@ -49,8 +51,8 @@ while True:
     snake.insert(0,new_head)
     snake.pop()
  
-    
     screen.fill((0,0,0))
+    pygame.draw.rect(screen,(255,0,0),(food[0],food[1],block_size,block_size))
  
     for block in snake:
         pygame.draw.rect(screen,(0,255,0),(block[0],block[1],block_size,block_size))       
