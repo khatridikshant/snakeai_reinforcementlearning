@@ -49,6 +49,10 @@ while True:
             
     new_head = (head_x,head_y)
     snake.insert(0,new_head)
+    
+    if new_head == food:
+        food = ((random.randrange(0,WIDTH,block_size),
+                 random.randrange(0,HEIGHT,block_size)))
     snake.pop()
  
     screen.fill((0,0,0))
