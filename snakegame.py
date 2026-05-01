@@ -53,6 +53,14 @@ while True:
         head_y += block_size
             
     new_head = (head_x,head_y)
+    if new_head in snake:
+        pygame.quit()
+        sys.exit()
+        
+    if (head_x >= WIDTH or head_x < 0) or (head_y >= HEIGHT or head_y < 0):
+        pygame.quit()
+        sys.exit() 
+    
     snake.insert(0,new_head)
     
     if new_head == food:
@@ -64,7 +72,10 @@ while True:
     else:
         snake.pop()
  
+
+ 
     screen.fill((0,0,0))
+    
     pygame.draw.rect(screen,(255,0,0),(food[0],food[1],block_size,block_size))
  
     for block in snake:
