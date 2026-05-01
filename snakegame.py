@@ -9,13 +9,18 @@ screen = pygame.display.set_mode((WIDTH,HEIGHT))
 pygame.display.set_caption("Snake Game")
 
 clock = pygame.time.Clock()
+font_style = pygame.font.SysFont('arial',20)
 snake = [(100,100), (90,100), (80,100)]
 block_size = 10
 
 direction = "RIGHT"
+score = 0
+
 food = (random.randrange(0,WIDTH,block_size),random.randrange(0,HEIGHT,block_size))
 
-
+def display_score(score):
+    value = font_style.render(f"Score: {score}",True, (255,255,255))
+    screen.blit(value, [10,10])
 
 while True:
     
@@ -51,9 +56,13 @@ while True:
     snake.insert(0,new_head)
     
     if new_head == food:
+        
         food = ((random.randrange(0,WIDTH,block_size),
                  random.randrange(0,HEIGHT,block_size)))
-    snake.pop()
+        score = score + 1
+        
+    else:
+        snake.pop()
  
     screen.fill((0,0,0))
     pygame.draw.rect(screen,(255,0,0),(food[0],food[1],block_size,block_size))
@@ -61,6 +70,8 @@ while True:
     for block in snake:
         pygame.draw.rect(screen,(0,255,0),(block[0],block[1],block_size,block_size))       
  
+ 
+    display_score(score)
     pygame.display.update()
  
     clock.tick(10)
