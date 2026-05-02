@@ -29,7 +29,7 @@ def reset():
     score = 0
     
     spawn_food()
-    get_state()
+    return get_state()
     
     
 
@@ -55,6 +55,24 @@ def step(action):
     new_head = (head_x,head_y)
     reward = 0
     done = False
+    
+    if (head_x >= WIDTH or head_x < 0 or 
+        head_y >= HEIGHT or head_y < 0 or
+        new_head in snake):
+        reward = -10
+        done = True
+        return get_state(),reward,done
+    snake.insert(0,new_head)
+    
+    if new_head == food:
+        score +=1
+        reward = 10
+        spawn_food()
+    else:
+        snake.pop()
+        reward = -0.1
+        
+    return get_state(), reward, done
 
 
 def change_direction(action):
