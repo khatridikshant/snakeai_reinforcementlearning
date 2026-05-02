@@ -28,3 +28,19 @@ def reset():
     direction = "RIGHT"
     score = 0
     
+    
+
+def spawn_food():
+    global food
+    food = (random.randrange(0,WIDTH,BLOCK_SIZE),random.randrange(0,HEIGHT,BLOCK_SIZE))
+
+def step(action):
+    global direction, score
+
+def change_direction(action):
+    global direction
+    idx = DIRECTIONS.index(direction)
+    if action == 1:
+        direction = DIRECTIONS[(idx + 1) % 4]
+    elif action == 2:
+        direction = DIRECTIONS[(idx - 1) % 4]
