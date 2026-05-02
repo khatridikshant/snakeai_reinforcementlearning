@@ -94,7 +94,12 @@ def render():
                      (food[0],food[1],BLOCK_SIZE,BLOCK_SIZE))
     
     for block in snake:
-        pygame.draw.rect(screen,(0,255,0),block[0])
+        pygame.draw.rect(screen,
+                         (0,255,0),(block[0],block[1],
+                                    BLOCK_SIZE, BLOCK_SIZE))
+        
+    pygame.display.update()
+    clock.tick()
         
 def close():
     pygame.quit()
