@@ -61,7 +61,7 @@ def step(action):
         new_head in snake):
         reward = -10
         done = True
-        return get_state(),reward,done
+        return None,reward,done
     snake.insert(0,new_head)
     
     if new_head == food:
@@ -89,6 +89,9 @@ def get_state():
     return state
 
 def render():
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
     screen.fill((0,0,0))
     pygame.draw.rect(screen, (255,0,0),
                      (food[0],food[1],BLOCK_SIZE,BLOCK_SIZE))
@@ -99,7 +102,7 @@ def render():
                                     BLOCK_SIZE, BLOCK_SIZE))
         
     pygame.display.update()
-    clock.tick()
+    clock.tick(10)
         
 def close():
     pygame.quit()
