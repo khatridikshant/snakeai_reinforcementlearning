@@ -28,6 +28,8 @@ def reset():
     direction = "RIGHT"
     score = 0
     
+    spawn_food()
+    
     
 
 def spawn_food():
@@ -36,6 +38,23 @@ def spawn_food():
 
 def step(action):
     global direction, score
+    change_direction(action)
+    head_x,head_y = snake[0]
+    
+    if direction == "RIGHT":
+        head_x += BLOCK_SIZE
+    elif direction == "LEFT":
+        head_x -= BLOCK_SIZE
+    elif direction == "UP":
+        head_y -= BLOCK_SIZE
+    elif direction == "DOWN":
+        head_y += BLOCK_SIZE
+        
+    
+    new_head = (head_x,head_y)
+    reward = 0
+    done = False
+
 
 def change_direction(action):
     global direction
@@ -44,3 +63,8 @@ def change_direction(action):
         direction = DIRECTIONS[(idx + 1) % 4]
     elif action == 2:
         direction = DIRECTIONS[(idx - 1) % 4]
+        
+def get_state():
+    head_x, head_y = snake[0]
+    state = np.array([head_x/WIDTH,head_y/HEIGHT,food[0]/WIDTH,food[1]/HEIGHT])
+    return state
