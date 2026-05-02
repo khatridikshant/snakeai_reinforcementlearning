@@ -29,6 +29,7 @@ def reset():
     score = 0
     
     spawn_food()
+    get_state()
     
     
 
@@ -68,3 +69,14 @@ def get_state():
     head_x, head_y = snake[0]
     state = np.array([head_x/WIDTH,head_y/HEIGHT,food[0]/WIDTH,food[1]/HEIGHT])
     return state
+
+def render():
+    screen.fill((0,0,0))
+    pygame.draw.rect(screen, (255,0,0),
+                     (food[0],food[1],BLOCK_SIZE,BLOCK_SIZE))
+    
+    for block in snake:
+        pygame.draw.rect(screen,(0,255,0),block[0])
+        
+def close():
+    pygame.quit()
